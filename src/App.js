@@ -1,23 +1,24 @@
-import React, { useRef, useEffect } from 'react';
-import WebViewer from '@pdftron/pdfjs-express';
-import './App.css';
+import React, { useRef, useEffect } from "react";
+import WebViewer from "@pdftron/pdfjs-express";
+import "./App.css";
 
 const App = () => {
   const viewer = useRef(null);
 
-  // if using a class, equivalent of componentDidMount 
+  // if using a class, equivalent of componentDidMount
   useEffect(() => {
     WebViewer(
       {
-        path: '/webviewer/lib',
-        initialDoc: '/files/pdftron_about.pdf',
+        licenseKey: "TiGwr9zyqIUnRQNgwrBp",
+        path: "/webviewer/lib",
+        initialDoc: "/files/sample.pdf",
       },
-      viewer.current,
+      viewer.current
     ).then((instance) => {
       const { docViewer, Annotations } = instance;
       const annotManager = docViewer.getAnnotationManager();
 
-      docViewer.on('documentLoaded', () => {
+      docViewer.on("documentLoaded", () => {
         const rectangleAnnot = new Annotations.RectangleAnnotation();
         rectangleAnnot.PageNumber = 1;
         // values are in page coordinates with (0, 0) in the top left
